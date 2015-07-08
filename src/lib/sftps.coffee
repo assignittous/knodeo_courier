@@ -2,14 +2,14 @@
 
 SFTPS = require('sftps')
 
-exports.sftps = {
+exports.sftp = {
 
 
   send: (options) ->
-    sftp = new SFTPS
+    sftps = new SFTPS
       host: 'domain.com'
       username: 'Test' 
       password: 'Test'
       port: 22 
-    sftp.cd('myDir').addFile(__dirname + '/test.txt').exec(console.log)
+    sftps.cd('myDir').addFile(__dirname + '/test.txt').exec(console.log)
 }
