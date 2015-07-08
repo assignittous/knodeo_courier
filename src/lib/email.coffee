@@ -5,20 +5,20 @@ logger = require("knodeo-logger").Logger
 
 exports.email = {
 
-  send: (envelope)->
+  send: (options)->
 
     transporter = nodemailer.createTransport
       service: 'Gmail'
       auth:
-        user: envelope.user
-        pass: envelope.password
+        user: options.credentials.user
+        pass: options.credentials.password
 
     mailOptions = 
-      from: envelope.from
-      to: envelope.to
-      subject: envelope.subject
-      text: envelope.text
-      attachments: envelope.attachments
+      from: options.message.from
+      to: options.message.to
+      subject: options.message.subject
+      text: options.message.text
+      attachments: options.message.attachments
 
     transporter.sendMail mailOptions, (err, info)->
       if err

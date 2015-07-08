@@ -5,18 +5,18 @@ logger = require("knodeo-logger").Logger
 exports.slack = {
 
   send: (options)->
-    console.log options
     slack = new Slack(options.token)
-    slack.uploadFile {
+    file = 
       file: fs.createReadStream(options.file)
       title: options.file
-      initialComment: 'no you come on'
-      channels: options.channels
-    }, (err) ->
+      initialComment: options.comment
+      channels: options.channels      
+      
+    slack.uploadFile file, (err) ->
       if err
+        logger.error "Slack upload failed"
         console.error err
       else
         logger.info "Slack message sent"
-
       return    
 }
