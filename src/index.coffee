@@ -4,7 +4,7 @@
 config = require('knodeo-configuration').Configuration
 config.load 'config.courier.cson'
 
-
+###
 email = require("./lib/email").email
 
 options =
@@ -22,3 +22,15 @@ options =
   ]
 
 email.send options
+###
+
+# https://api.slack.com/methods/channels.list
+
+slack = require("./lib/slack").slack
+
+options = 
+  token: config.current.transports.slack.token
+  file: "test.xlsx"
+  channels: config.current.transports.slack.channels
+
+slack.send options
